@@ -1,0 +1,22 @@
+<?php
+/*
+||
+||--------------------------------- 
+|| Route for not administrator
+||--------------------------------
+||
+*/
+Route::group(['middleware' => ['web']], function () {
+	
+});
+
+/*
+||
+||--------------------------------- 
+|| Route administrator
+||--------------------------------
+||
+*/
+Route::group(['prefix' => $this->admin, 'middleware' => ['web','admin'], 'namespace' => 'DummyNamespace\Controllers'], function () {
+	Route::get('ModuleName/index', ['as' => $this->admin.'.ModuleName.index','uses' => 'DefaultController@index']);
+});

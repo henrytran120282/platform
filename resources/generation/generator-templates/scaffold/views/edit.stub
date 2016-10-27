@@ -1,0 +1,23 @@
+@extends('layouts.admin')
+
+@section('content')
+<div class="row">
+    <div class="x_panel">
+    <div class="x_title">
+      <h2>$MODEL_NAME_HUMAN$r</h2>
+      <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+    	<div class="row">
+		    <div class="col-md-12">
+		         @include('adminlte-templates::common.errors')
+		    </div>
+		    {!! Form::model($$MODEL_NAME_CAMEL$, ['route' => ['$ROUTE_NAMED_PREFIX$$MODEL_NAME_PLURAL_CAMEL$.update', $$MODEL_NAME_CAMEL$->$PRIMARY_KEY_NAME$], 'method' => 'patch']) !!}
+
+                @include('$VIEW_PREFIX$$MODEL_NAME_PLURAL_SNAKE$.fields')
+
+            {!! Form::close() !!}
+		</div>
+	</div>
+</div>
+@endsection

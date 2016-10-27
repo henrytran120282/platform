@@ -1,0 +1,124 @@
+<?php
+
+namespace App\Modules\ModuleName\Controllers;
+
+use Illuminate\Http\Request;
+use App\Modules\ContentManager\Models\Articles;
+use App\Modules\ContentManager\Models\Terms;
+use App\Modules\ContentManager\Models\TermRelationships;
+use App\Http\Controllers\Controller;
+use Admin;
+class controllerName extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $model = Articles::where('post_type','SmallName')->orderBy('id', 'desc')->paginate(10);
+        return view("ModuleName::SmallName.index",['model' => $model]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view("ModuleName::SmallName.create",["model"=>""]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $model = new Articles();
+        $this->validate($request, [
+            'post_content' => 'required',
+            'post_title' => 'required|max:255',
+        ]);
+        $model->post_author = \Auth::guard('admin')->user()->id;
+        $model->post_type = "SmallName";
+        $model->post_name = str_slug($request->post_title,"-");
+        $model->post_title = $request->post_title;
+        $model->post_content = $request->post_content;
+        $model->save();
+        foreach ($request->meta as $key => $value) {
+           $model->meta()->updateOrCreate(["meta_key"=>$key],["meta_key"=>$key,"meta_value"=>$value]);
+        }
+        return redirect(Admin::StrURL('routeModule/SmallName')); 
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($slug)
+    {
+        $model = Articles::where("post_name",$slug)->where("post_type","SmallName")->firstOrFail();
+        $viewTheme = Theme::active().'.SmallName.view';
+        return view()->exists($viewTheme) ? view($viewTheme,['model'=>$model]) : view("ModuleName::SmallName.show",['model'=>$model]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $model = Articles::find($id);
+        return view("ModuleName::SmallName.update",['model' => $model]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $model = Articles::find($id);
+        $this->validate($request, [
+            'post_content' => 'required',
+            'post_title' => 'required|max:255',
+        ]);
+        $model->post_type = "SmallName";
+        $model->post_name = str_slug($request->post_title,"-");
+        $model->post_title = $request->post_title;
+        $model->post_content = $request->post_content;
+        $model->save();
+        foreach ($request->meta as $key => $value) {
+           $model->meta()->updateOrCreate(["meta_key"=>$key],["meta_key"=>$key,"meta_value"=>$value]);
+        }
+        return redirect(Admin::StrURL('routeModule/SmallName'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $tmp = explode(",", $id);
+        if(is_array($tmp)){
+            Articles::destroy($tmp);
+        }else{
+            Articles::destroy($id);              
+        }
+    }
+}
