@@ -37,4 +37,8 @@ class Terms extends Model
 		$count = TermRelationships::where("object_id",$post_id)->where("term_taxonomy_id",$this->term_id)->count();
 		return ($count > 0) ? true : false ;
 	}
+
+	public function links(){
+        return url('/'.$this->posts()->slug);
+    }
 }

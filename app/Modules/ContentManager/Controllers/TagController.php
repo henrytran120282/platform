@@ -59,11 +59,14 @@ class TagController extends Controller
     public function show($slug)
     {
         $model = Terms::where("slug",$slug)->where('taxonomy','tag')->firstOrFail();
-        if (view()->exists(Theme::active().'.post.archive')) {
-            return view(Theme::active().'.post.archive',['model'=>$model,'appTitle'=>$model->name]);
-        }else{
-            return view("ContentManager::tag.show",['model'=>$model,'appTitle'=>$model->name]);
-        }
+
+        return view("ContentManager::tag.show", ['model'=>$model,'appTitle'=>$model->name]);
+
+//        if (view()->exists(Theme::active().'.post.archive')) {
+//            return view(Theme::active().'.post.archive',['model'=>$model,'appTitle'=>$model->name]);
+//        }else{
+//            return view("ContentManager::tag.show", ['model'=>$model,'appTitle'=>$model->name]);
+//        }
     }
 
     /**

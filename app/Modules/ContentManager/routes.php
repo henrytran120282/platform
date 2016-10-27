@@ -8,7 +8,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/{slug?}', 'App\Modules\ContentManager\Controllers\PostController@show');
 	Route::post('/{slug?}/addcomment', 'App\Modules\ContentManager\Controllers\PostController@addcomment');
 	Route::get('/category/{slug?}', 'App\Modules\ContentManager\Controllers\CategoryController@show');
-	Route::get('/tag/{slug?}', 'App\Modules\ContentManager\Controllers\tagController@show');
+	Route::get('/tag/{slug?}', 'App\Modules\ContentManager\Controllers\TagController@show');
 });
 
 Route::group(['prefix' => $this->admin, 'middleware' => ['web','admin'], 'namespace' => 'App\Modules\ContentManager\Controllers'], function () {
