@@ -27,8 +27,8 @@ return [
     */
 	'name' => 'smallpine',
     'version' => '1.0.0',
-    'author' => 'QSoft Viet Nam',
-    'author_url' => 'http://qsoftvietnam.com',
+    'author' => 'ITLSVN',
+    'author_url' => 'https://www.facebook.com/hoainam.tran.355',
     'description' => 'Default Theme',
     'image_preview' => 'preview.jpg',
 
@@ -62,7 +62,7 @@ return [
             [
 				'name'=>'copyright',
                 'type'=>'text',
-                'value'=>'Copyright &copy; 2016 qsoftvietnam.com',
+                'value'=>'Copyright &copy; 2016 ITLSVN',
                 'label'=>'Copyright Text',
             ],
             [
@@ -87,10 +87,10 @@ return [
                 'label'=>'Twitter',
 			],
 			[
-				'name'=>'instagram',
+				'name'=>'google_plus',
                 'type'=>'text',
                 'value'=>'',
-                'label'=>'Instagram',
+                'label'=>'Google Plus',
 			],
 			[
 				'name'=>'youtube',

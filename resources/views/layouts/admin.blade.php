@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Administrator | QSoft-cms</title>
+    <title>Administrator | ITLSVN</title>
     <!-- Bootstrap -->
     <link href="{{ URL::to('/assets/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Font Awesome -->
@@ -214,7 +214,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Thank for using QSoft-cms 1.0
+            Thank for using ITLSVN-CMS 1.0
           </div>
           <div class="clearfix"></div>
         </footer>
