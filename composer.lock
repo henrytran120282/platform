@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "990e1f7f89a02e8e66f6051bd451f22d",
-    "content-hash": "fe1186fccde235cdfb6498d709559478",
+    "hash": "84111c01ce312c7880dfc7528cf8ab05",
+    "content-hash": "0bbf0b8d28c9ceb915b5222b45e973a8",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -60,6 +60,56 @@
                 "webprofiler"
             ],
             "time": "2016-09-15 14:05:56"
+        },
+        {
+            "name": "chumper/zipper",
+            "version": "0.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Chumper/Zipper.git",
+                "reference": "313e364259398557bdcc2f68e6ff20d71aaea811"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Chumper/Zipper/zipball/313e364259398557bdcc2f68e6ff20d71aaea811",
+                "reference": "313e364259398557bdcc2f68e6ff20d71aaea811",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/filesystem": "5.x",
+                "illuminate/support": "5.x",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "dev-master",
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Chumper\\Zipper": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache2"
+            ],
+            "authors": [
+                {
+                    "name": "Nils Plaschke",
+                    "email": "github@nilsplaschke.de",
+                    "homepage": "http://nilsplaschke.de",
+                    "role": "Developer"
+                }
+            ],
+            "description": "This is a little neat helper for the ZipArchive methods with handy functions",
+            "homepage": "http://github.com/Chumper/zipper",
+            "keywords": [
+                "archive",
+                "laravel",
+                "zip"
+            ],
+            "time": "2015-02-16 11:38:11"
         },
         {
             "name": "classpreloader/classpreloader",
@@ -787,6 +837,53 @@
                 "uri"
             ],
             "time": "2016-06-24 23:00:38"
+        },
+        {
+            "name": "infinety-es/filemanager",
+            "version": "2.1.1.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Krato/Laravel-5-File-Manager.git",
+                "reference": "81562fae94136e97899af346a10c582d999a2e49"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Krato/Laravel-5-File-Manager/zipball/81562fae94136e97899af346a10c582d999a2e49",
+                "reference": "81562fae94136e97899af346a10c582d999a2e49",
+                "shasum": ""
+            },
+            "require": {
+                "chumper/zipper": "0.6.x",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Infinety\\FileManager\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eric Lagarda",
+                    "email": "eric@infinety.es"
+                }
+            ],
+            "description": "Laravel 5 Filemanager",
+            "homepage": "https://github.com/Krato/Laravel-5-File-Manager",
+            "keywords": [
+                "file",
+                "infinety",
+                "laravel 5",
+                "manager"
+            ],
+            "time": "2016-05-31 08:07:39"
         },
         {
             "name": "infyomlabs/adminlte-templates",

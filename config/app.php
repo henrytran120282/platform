@@ -169,6 +169,7 @@ return [
         \InfyOm\Generator\InfyOmGeneratorServiceProvider::class,
         \InfyOm\AdminLTETemplates\AdminLTETemplatesServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+		Infinety\FileManager\FileManagerServiceProvider::class,
     ],
 
     /*
