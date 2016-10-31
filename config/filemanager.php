@@ -44,7 +44,7 @@ return array(
     |--------------------------------------------------------------------------
     |
     */
-    'exceptFiles'   => array( 'robots.txt', 'index.php', '.DS_Store', '.Thumbs.db'),
+    'exceptFiles'   => array( 'robots.txt', 'index.php', '.DS_Store', '.Thumbs.db','.config'),
 
 
     /*
