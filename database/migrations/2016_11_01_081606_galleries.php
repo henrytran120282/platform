@@ -15,7 +15,7 @@ class Galleries extends Migration
         Schema::create('galleries', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
             $table->string('gallery_name', 100);
-            $table->boolean('status');
+            $table->boolean('gallery_status');
             $table->timestamps();
             $table->softDeletes();
         });

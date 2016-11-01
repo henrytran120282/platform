@@ -8,11 +8,10 @@
     @foreach($galleries as $galleries)
         <tr>
             <td>{!! $galleries->gallery_name !!}</td>
-            <td>{!! $galleries->gallery_status !!}</td>
+            <td>{!! (($galleries->gallery_status == true)? '<span class="label label-success">Active</span>':'<span class="label label-danger">Deactive</span>') !!}</td>
             <td>
                 {!! Form::open(['route' => ['admin.galleries.destroy', $galleries->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>
-                    <a href="{!! route('admin.galleries.show', [$galleries->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
                     <a href="{!! route('admin.galleries.edit', [$galleries->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
                     {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
                 </div>

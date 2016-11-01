@@ -7,7 +7,7 @@
 <!-- Gallery Status Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('gallery_status', 'Gallery Status:') !!}
-    {!! Form::number('gallery_status', null, ['class' => 'form-control']) !!}
+    {!! Form::select('gallery_status', [0=>'Deactive', 1=>'Active'], ($galleries->gallery_status == true ? 1 : 0), ['class' => 'form-control']) !!}
 </div>
 
 <!-- Submit Field -->
