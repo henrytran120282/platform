@@ -44,11 +44,10 @@
                 </div>
                 <div class="pull-right">
                     <div class="social">
-                        <a href="#" target="_blank"><i class="fa fa-facebook"></i></a>                      
-                        <a href="#" target="_blank"><i class="fa fa-twitter"></i></a>                       
-                        <a href="#" target="_blank"><i class="fa fa-instagram"></i></a>                     
-                        <a href="#" target="_blank"><i class="fa fa-pinterest"></i></a>                     
-                        <a href="#" target="_blank"><i class="fa fa-heart"></i></a> 
+                        <a href="{{((Theme::option('social_media','facebook') != "")?Theme::option('social_media','facebook'):'#')}}" target="_blank"><i class="fa fa-facebook"></i></a>
+                        <a href="{{((Theme::option('social_media','twitter') != "")?Theme::option('social_media','twitter'):'#')}}" target="_blank"><i class="fa fa-twitter"></i></a>
+                        <a href="{{((Theme::option('social_media','instagram') != "")?Theme::option('social_media','instagram'):'#')}}" target="_blank"><i class="fa fa-instagram"></i></a>
+                        <a href="{{((Theme::option('social_media','youtube') != "")?Theme::option('social_media','youtube'):'#')}}" target="_blank"><i class="fa fa-youtube-play"></i></a>
                     </div> 
                 </div> 
             </div>

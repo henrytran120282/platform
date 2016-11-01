@@ -10,11 +10,10 @@
             @endif
         </div>
         <ul class="footer-social">
-            <li><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>                      
-            <li><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>                       
-            <li><a href="#" target="_blank"><i class="fa fa-instagram"></i></a></li>                     
-            <li><a href="#" target="_blank"><i class="fa fa-pinterest"></i></a></li>                     
-            <li><a href="#" target="_blank"><i class="fa fa-heart"></i></a></li>  
+            <li><a href="{{((Theme::option('social_media','facebook') != "")?Theme::option('social_media','facebook'):'#')}}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="{{((Theme::option('social_media','twitter') != "")?Theme::option('social_media','twitter'):'#')}}" target="_blank"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="{{((Theme::option('social_media','instagram') != "")?Theme::option('social_media','instagram'):'#')}}" target="_blank"><i class="fa fa-instagram"></i></a></li>
+            <li><a href="{{((Theme::option('social_media','youtube') != "")?Theme::option('social_media','youtube'):'#')}}" target="_blank"><i class="fa fa-youtube-play"></i></a></li>
         </ul>
         <div class="site-info">
             {!! Theme::option('general','copyright') !!}
