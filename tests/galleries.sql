@@ -24,7 +24,7 @@ CREATE TABLE `galleries` (
   `gallery_status` int(4) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `deleted_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -45,7 +45,7 @@ CREATE TABLE `gallery_images` (
   `image_status` int(4) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `deleted_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `gallery_images_gallery_id_foreign` (`gallery_id`),
   CONSTRAINT `gallery_images_gallery_id_foreign` FOREIGN KEY (`gallery_id`) REFERENCES `galleries` (`id`) ON DELETE CASCADE

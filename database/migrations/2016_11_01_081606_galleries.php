@@ -12,7 +12,13 @@ class Galleries extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('galleries', function (Blueprint $table) {
+            $table->bigIncrements('id')->unsigned();
+            $table->string('gallery_name', 100);
+            $table->boolean('status');
+            $table->timestamps();
+            $table->softDeletes();
+        });
     }
 
     /**
@@ -22,6 +28,6 @@ class Galleries extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('galleries');
     }
 }
