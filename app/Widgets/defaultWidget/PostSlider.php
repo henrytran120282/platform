@@ -2,9 +2,11 @@
 
 namespace App\Widgets\defaultWidget;
 
+use App\Entities\Galleries;
 use App\Widgets\BaseWidget;
 use App\Modules\ContentManager\Models\Terms;
 use App\Modules\ContentManager\Models\Articles;
+
 class PostSlider extends BaseWidget
 {
 	public function __construct() {
@@ -18,7 +20,9 @@ class PostSlider extends BaseWidget
 
     public function form(){
         $model = Terms::where("taxonomy","category")->get();
-        return \View::make('widgets.defaultWidget.PostSlider.form',['options'=>$this->options,'model'=>$model])->render();     
+        $galleries = Galleries::where('gallery_status', 1);//TODO
+
+        return \View::make('widgets.defaultWidget.PostSlider.form',['options'=>$this->options,'model'=>$model, 'galleries'=>$galleries])->render();
     }
 
     public function run(){
