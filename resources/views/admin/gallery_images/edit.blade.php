@@ -12,7 +12,7 @@
 		    <div class="col-md-12">
 		         @include('adminlte-templates::common.errors')
 		    </div>
-		    {!! Form::model($galleryImages, ['route' => ['admin.galleryImages.update', $galleryImages->id], 'method' => 'patch']) !!}
+		    {!! Form::model($galleryImages, ['route' => ['admin.galleryImages.update', $galleryImages->id], 'method' => 'patch', 'class'=>'form', 'novalidate'=>'novalidate', 'files'=>true]) !!}
 
                 @include('admin.gallery_images.fields')
 

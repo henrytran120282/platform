@@ -6,8 +6,8 @@
 
 <!-- Image Name Field -->
 <div class="form-group">
-    {!! Form::label('image_name', 'Image Name:') !!}
-    <p>{!! $galleryImages->image_name !!}</p>
+    {!! Form::label('image_name', 'Image:') !!}
+    <p><img width="150" src="/uploads/gallery/{{$galleryImages->gallery_id}}/{{$galleryImages->image_name}}"></p>
 </div>
 
 <!-- Image Title Field -->

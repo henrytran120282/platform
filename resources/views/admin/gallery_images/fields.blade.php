@@ -18,8 +18,11 @@
 
 <!-- Gallery Id Field -->
 <div class="form-group col-sm-6">
+    @foreach($galleries as $gallery)
+        <?php $galleryArr[$gallery->id] = $gallery->gallery_name;?>
+    @endforeach
     {!! Form::label('gallery_id', 'Gallery Id:') !!}
-    {!! Form::select('gallery_id',[0=>'Gallery 01', 1=>'Gallery 02'], 1, ['class' => 'form-control']) !!}
+    {!! Form::select('gallery_id', $galleryArr, (isset($galleryImages)?$galleryImages->gallery_id:0), ['class' => 'form-control']) !!}
 </div>
 
 <!-- Image Status Field -->

@@ -61,6 +61,6 @@ class GalleryImages extends Model
      **/
     public function gallery()
     {
-        return $this->belongsTo(\App\Entities\Gallery::class);
+        return $this->belongsTo(\App\Entities\Galleries::class);
     }
 }

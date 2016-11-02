@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\Galleries;
 use App\Http\Requests\CreateGalleryImagesRequest;
 use App\Http\Requests\UpdateGalleryImagesRequest;
 use App\Repositories\GalleryImagesRepository;
@@ -31,7 +32,6 @@ class GalleryImagesController extends AppBaseController
     {
         $this->galleryImagesRepository->pushCriteria(new RequestCriteria($request));
         $galleryImages = $this->galleryImagesRepository->all();
-
         return view('admin.gallery_images.index')
             ->with('galleryImages', $galleryImages);
     }
@@ -43,7 +43,8 @@ class GalleryImagesController extends AppBaseController
      */
     public function create()
     {
-        return view('admin.gallery_images.create');
+        $galleries = Galleries::all();
+        return view('admin.gallery_images.create')->with('galleries',$galleries);
     }
 
     /**
@@ -56,9 +57,17 @@ class GalleryImagesController extends AppBaseController
     public function store(CreateGalleryImagesRequest $request)
     {
         $input = $request->all();
-
+        $file = $request->file('image_name');
+        $fileName = time().'-'.$file->getClientOriginalName();
+        $input['image_name'] = $fileName;
         $galleryImages = $this->galleryImagesRepository->create($input);
-
+        if($galleryImages){
+            $pathUpload = public_path('uploads/gallery/'.$input['gallery_id']);
+            if(!is_dir($pathUpload)){
+                mkdir($pathUpload);
+            }
+            $file->move($pathUpload,$fileName);
+        }
         Flash::success('Gallery Images saved successfully.');
 
         return redirect(route('admin.galleryImages.index'));
@@ -94,14 +103,14 @@ class GalleryImagesController extends AppBaseController
     public function edit($id)
     {
         $galleryImages = $this->galleryImagesRepository->findWithoutFail($id);
-
+        $galleries = Galleries::all();
         if (empty($galleryImages)) {
             Flash::error('Gallery Images not found');
 
             return redirect(route('admin.galleryImages.index'));
         }
 
-        return view('admin.gallery_images.edit')->with('galleryImages', $galleryImages);
+        return view('admin.gallery_images.edit')->with('galleryImages', $galleryImages)->with('galleries', $galleries);
     }
 
     /**
@@ -114,6 +123,10 @@ class GalleryImagesController extends AppBaseController
      */
     public function update($id, UpdateGalleryImagesRequest $request)
     {
+        $input = $request->all();
+        $file = $request->file('image_name');
+        $fileName = time().'-'.$file->getClientOriginalName();
+        $input['image_name'] = $fileName;
         $galleryImages = $this->galleryImagesRepository->findWithoutFail($id);
 
         if (empty($galleryImages)) {
@@ -122,7 +135,14 @@ class GalleryImagesController extends AppBaseController
             return redirect(route('admin.galleryImages.index'));
         }
 
-        $galleryImages = $this->galleryImagesRepository->update($request->all(), $id);
+        $galleryImages = $this->galleryImagesRepository->update($input, $id);
+        if($galleryImages){
+            $pathUpload = public_path('uploads/gallery/'.$input['gallery_id']);
+            if(!is_dir($pathUpload)){
+                mkdir($pathUpload);
+            }
+            $file->move($pathUpload,$fileName);
+        }
 
         Flash::success('Gallery Images updated successfully.');
 

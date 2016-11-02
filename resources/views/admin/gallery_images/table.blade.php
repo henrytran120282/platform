@@ -1,6 +1,6 @@
 <table class="table table-responsive" id="galleryImages-table">
     <thead>
-        <th>Image Name</th>
+        <th>Image</th>
         <th>Image Title</th>
         <th>Image Description</th>
         <th>Gallery Id</th>
@@ -10,10 +10,10 @@
     <tbody>
     @foreach($galleryImages as $galleryImages)
         <tr>
-            <td>{!! $galleryImages->image_name !!}</td>
+            <td><img width="150" src="/uploads/gallery/{{$galleryImages->gallery_id}}/{{$galleryImages->image_name}}"></td>
             <td>{!! $galleryImages->image_title !!}</td>
             <td>{!! $galleryImages->image_description !!}</td>
-            <td>{!! $galleryImages->gallery_id !!}</td>
+            <td>{!! $galleryImages->gallery->gallery_name !!}</td>
             <td>{!! $galleryImages->image_status !!}</td>
             <td>
                 {!! Form::open(['route' => ['admin.galleryImages.destroy', $galleryImages->id], 'method' => 'delete']) !!}
