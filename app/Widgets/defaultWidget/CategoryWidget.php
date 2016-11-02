@@ -7,11 +7,19 @@ use App\Modules\ContentManager\Models\Terms;
 class CategoryWidget extends BaseWidget
 {
 	public function __construct() {
+        $model = Terms::where("taxonomy","category")->get();
+        $categoryList = [];
+        if(count($model->toArray()) > 0){
+            foreach ($model as $category){
+                $categoryList[$category->term_id] = $category->name;
+            }
+        }
     	$this->name = "Category Widget";
         $this->description = 'This widget for show category';
         $this->options = [
             'title'=>'',
-            'type'=>'',
+            'categoryList'=>$categoryList,
+            'type' => ''
         ];
     }
 
@@ -21,7 +29,13 @@ class CategoryWidget extends BaseWidget
     }
 
     public function run(){
-    	$category = Terms::where("taxonomy","category")->get();
+        if($this->options['type'] == 0) {
+            $category = Terms::where("taxonomy", "category")->get();
+        }
+        else {
+            $category = Terms::where("taxonomy", "category")->where('term_id', $this->options['type'])->get();
+        }
+
         return \View::make('widgets.defaultWidget.CategoryWidget.run',['options'=>$this->options,'model'=>$category])->render();   
     }
 }
