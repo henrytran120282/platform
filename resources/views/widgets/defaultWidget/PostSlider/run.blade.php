@@ -9,7 +9,7 @@
                          class="img-responsive"/>
                 </div>
                 <div class="slider-content">
-                    <a href="#">
+                    <a href="{{$value->image_link}}">
                         <h1>{{ $value->image_title }}</h1>
                     </a>
 
