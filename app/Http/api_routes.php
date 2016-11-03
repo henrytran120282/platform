@@ -38,3 +38,11 @@ Route::resource('generations', 'GenerationAPIController');
 
 
 
+
+
+Route::get('admin/roles', 'RolesAPIController@index');
+Route::post('admin/roles', 'RolesAPIController@store');
+Route::get('admin/roles/{roles}', 'RolesAPIController@show');
+Route::put('admin/roles/{roles}', 'RolesAPIController@update');
+Route::patch('admin/roles/{roles}', 'RolesAPIController@update');
+Route::delete('admin/roles{roles}', 'RolesAPIController@destroy');

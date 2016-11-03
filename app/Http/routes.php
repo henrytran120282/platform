@@ -62,3 +62,13 @@ Route::patch('admin/galleryImages/{galleryImages}', ['as'=> 'admin.galleryImages
 Route::delete('admin/galleryImages/{galleryImages}', ['as'=> 'admin.galleryImages.destroy', 'uses' => 'GalleryImagesController@destroy']);
 Route::get('admin/galleryImages/{galleryImages}', ['as'=> 'admin.galleryImages.show', 'uses' => 'GalleryImagesController@show']);
 Route::get('admin/galleryImages/{galleryImages}/edit', ['as'=> 'admin.galleryImages.edit', 'uses' => 'GalleryImagesController@edit']);
+
+
+Route::get('admin/roles', ['as'=> 'admin.roles.index', 'uses' => 'RolesController@index']);
+Route::post('admin/roles', ['as'=> 'admin.roles.store', 'uses' => 'RolesController@store']);
+Route::get('admin/roles/create', ['as'=> 'admin.roles.create', 'uses' => 'RolesController@create']);
+Route::put('admin/roles/{roles}', ['as'=> 'admin.roles.update', 'uses' => 'RolesController@update']);
+Route::patch('admin/roles/{roles}', ['as'=> 'admin.roles.update', 'uses' => 'RolesController@update']);
+Route::delete('admin/roles/{roles}', ['as'=> 'admin.roles.destroy', 'uses' => 'RolesController@destroy']);
+Route::get('admin/roles/{roles}', ['as'=> 'admin.roles.show', 'uses' => 'RolesController@show']);
+Route::get('admin/roles/{roles}/edit', ['as'=> 'admin.roles.edit', 'uses' => 'RolesController@edit']);

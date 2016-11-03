@@ -17,6 +17,7 @@ class GalleryImages extends Migration
             $table->bigInteger('gallery_id')->unsigned();
             $table->string('image_name', 150);
             $table->string('image_title', 150);
+            $table->string('image_link', 255);
             $table->text('image_description');
             $table->boolean('image_status');
             $table->index('gallery_id');

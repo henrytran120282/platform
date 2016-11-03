@@ -8,4 +8,7 @@
             <a href="{!! route('admin.galleryImages.index') !!}"><i class="fa fa-image"></i><span>Gallery Images</span></a>
         </li>
     </ul>
+</li><li class="{{ Request::is('roles*') ? 'active' : '' }}">
+    <a href="{!! route('admin.roles.index') !!}"><i class="fa fa-edit"></i><span>Roles</span></a>
 </li>
+

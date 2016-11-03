@@ -26,6 +26,7 @@ class GalleryImages extends Model
         'image_name',
         'image_title',
         'image_description',
+        'image_link',
         'gallery_id',
         'image_status',
         'created_at',
@@ -43,6 +44,7 @@ class GalleryImages extends Model
         'image_name' => 'string',
         'image_title' => 'string',
         'image_description' => 'string',
+        'image_link' => 'string',
         'gallery_id' => 'integer',
         'image_status' => 'integer'
     ];

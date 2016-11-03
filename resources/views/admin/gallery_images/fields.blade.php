@@ -16,6 +16,12 @@
     {!! Form::textarea('image_description', null, ['class' => 'form-control']) !!}
 </div>
 
+<!-- Image Description Field -->
+<div class="form-group col-sm-12 col-lg-12">
+    {!! Form::label('image_link', 'Attach Link:') !!}
+    {!! Form::text('image_link', null, ['class' => 'form-control']) !!}
+</div>
+
 <!-- Gallery Id Field -->
 <div class="form-group col-sm-6">
     @foreach($galleries as $gallery)
