@@ -57,17 +57,15 @@ class GalleryImagesController extends AppBaseController
     public function store(CreateGalleryImagesRequest $request)
     {
         $input = $request->all();
+
         $file = $request->file('image_name');
-        $fileName = time().'-'.$file->getClientOriginalName();
-        $input['image_name'] = $fileName;
-        $galleryImages = $this->galleryImagesRepository->create($input);
-        if($galleryImages){
+        if($file != null){
             $pathUpload = public_path('uploads/gallery/'.$input['gallery_id']);
-            if(!is_dir($pathUpload)){
-                mkdir($pathUpload);
-            }
-            $file->move($pathUpload,$fileName);
+            $input['image_name'] = $this->uploadFile($file, $pathUpload);
         }
+
+        $this->galleryImagesRepository->create($input);
+
         Flash::success('Gallery Images saved successfully.');
 
         return redirect(route('admin.galleryImages.index'));
@@ -125,9 +123,14 @@ class GalleryImagesController extends AppBaseController
     {
         $input = $request->all();
         $file = $request->file('image_name');
-        $fileName = time().'-'.$file->getClientOriginalName();
-        $input['image_name'] = $fileName;
+
         $galleryImages = $this->galleryImagesRepository->findWithoutFail($id);
+        $input['image_name'] = $galleryImages->image_name;
+
+        if($file != null){
+            $pathUpload = public_path('uploads/gallery/'.$input['gallery_id']);
+            $input['image_name'] = $this->uploadFile($file, $pathUpload);
+        }
 
         if (empty($galleryImages)) {
             Flash::error('Gallery Images not found');
@@ -136,13 +139,6 @@ class GalleryImagesController extends AppBaseController
         }
 
         $galleryImages = $this->galleryImagesRepository->update($input, $id);
-        if($galleryImages){
-            $pathUpload = public_path('uploads/gallery/'.$input['gallery_id']);
-            if(!is_dir($pathUpload)){
-                mkdir($pathUpload);
-            }
-            $file->move($pathUpload,$fileName);
-        }
 
         Flash::success('Gallery Images updated successfully.');
 
@@ -171,5 +167,24 @@ class GalleryImagesController extends AppBaseController
         Flash::success('Gallery Images deleted successfully.');
 
         return redirect(route('admin.galleryImages.index'));
+    }
+    /**
+     * Upload image to  gallery folder
+     *
+     * @param file image_name
+     *
+     * @return image_name
+     */
+    private function uploadFile($file, $pathUpload){
+
+        $fileName = time().'-'.$file->getClientOriginalName();
+
+        if(!is_dir($pathUpload)){
+            mkdir($pathUpload);
+        }
+        if($file->move($pathUpload,$fileName)){
+            return $fileName;
+        }
+        return false;
     }
 }

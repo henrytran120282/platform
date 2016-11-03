@@ -2,6 +2,9 @@
 <div class="form-group col-sm-6">
     {!! Form::label('image_name', 'Select Image:') !!}
     {!! Form::file('image_name', null, ['class' => 'form-control']) !!}
+    @if(isset($galleryImages))
+        <img width="200" src="/uploads/gallery/{{$galleryImages->gallery_id}}/{{$galleryImages->image_name}}">
+    @endif
 </div>
 
 <!-- Image Title Field -->
@@ -24,9 +27,11 @@
 
 <!-- Gallery Id Field -->
 <div class="form-group col-sm-6">
-    @foreach($galleries as $gallery)
-        <?php $galleryArr[$gallery->id] = $gallery->gallery_name;?>
-    @endforeach
+    @if($galleries)
+        @foreach($galleries as $gallery)
+            <?php $galleryArr[$gallery->id] = $gallery->gallery_name;?>
+        @endforeach
+    @endif
     {!! Form::label('gallery_id', 'Gallery Id:') !!}
     {!! Form::select('gallery_id', $galleryArr, (isset($galleryImages)?$galleryImages->gallery_id:0), ['class' => 'form-control']) !!}
 </div>

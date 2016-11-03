@@ -13,6 +13,7 @@ class UserTableSeeder extends Seeder
     {
         DB::table('users')->insert([
         	[
+	            'role_id' => 1,
 	            'name' => 'Administrator',
 	            'email' => 'henry.tran@qsoft.com.vn',
 	            'is_admin' => true,
