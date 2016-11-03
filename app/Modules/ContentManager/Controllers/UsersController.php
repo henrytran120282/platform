@@ -7,6 +7,8 @@ use App\User;
 use Admin;
 use App\Http\Controllers\Controller;
 use App\Modules\ContentManager\Models\Articles;
+use App\Entities\Roles;
+
 class UsersController extends Controller
 {
     /**
@@ -27,7 +29,8 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view("ContentManager::user.create",['model' => ""]);
+        $roles = Roles::all();
+        return view("ContentManager::user.create",['model' => "", 'roles'=>$roles]);
     }
 
     /**
@@ -47,6 +50,7 @@ class UsersController extends Controller
 
         $model->name = $request->name;
         $model->email = $request->email;
+        $model->role_id = $request->role_id;
         $model->password = bcrypt($request->password);
         $model->description = $request->description;
         $model->photo = $request->photo;
@@ -76,7 +80,8 @@ class UsersController extends Controller
     public function edit($id)
     {
         $model = User::find($id);
-        return view("ContentManager::user.create",['model' => $model]);
+        $roles = Roles::all();
+        return view("ContentManager::user.create",['model' => $model, 'roles'=>$roles]);
     }
 
     /**
@@ -97,6 +102,7 @@ class UsersController extends Controller
         $model->name = $request->name;
         $model->email = $request->email;
         $model->description = $request->description;
+        $model->role_id = $request->role_id;
         $model->photo = $request->photo;
         $model->save();
         return redirect(Admin::StrURL('contentManager/user'));
