@@ -51,6 +51,13 @@
 							</label>
 						</div>
 					</li>
+					<li id="page-0">
+						<div class="checkbox">
+							<label>
+								<input class="pagemenu" data-url="{{ Url('/contacts') }}" data-type="home" value="Contact Us" type="checkbox"> Contact Us
+							</label>
+						</div>
+					</li>
 		        @foreach($page as $node)
 	                <li id="page-{{ $node->id }}">
 						<div class="checkbox">

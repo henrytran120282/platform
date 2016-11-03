@@ -16,7 +16,7 @@
         <thead>
           <tr> 
             <th><input id="checkAll" type="checkbox" class="flat"></th>
-            <th>Post Title</th> 
+            <th>Page Title</th>
             <th>Author</th> 
             <th>Date</th> 
           </tr> 

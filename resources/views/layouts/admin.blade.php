@@ -78,7 +78,7 @@
                     </ul>
                   </li>
                   @endif
-                  <li><a href="/admin/contentManager/filemanager"><i class="fa fa-image"></i> File Manager </a></li>
+                  {{--<li><a href="/admin/contentManager/filemanager"><i class="fa fa-image"></i> File Manager </a></li>--}}
                   @include('layouts.generated-menu')
                   <li><a href="{{ Admin::route('contentManager.user.index') }}"><i class="fa fa-users"></i> Users Manager </a></li>
                   <li><a href="{{ Admin::route('contentManager.setting') }}"><i class="fa fa-gear"></i> Setting</a></li>

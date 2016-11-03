@@ -5,8 +5,8 @@
     <input name="_method" type="hidden" value="PUT">
     @endif
     <div class="form-group">
-        <label for="title-post">Title Post</label>
-        <input type="text" class="form-control" name="post_title" value="{{ ($model != "" ) ? $model->post_title : old('post_title') }}" id="title-post" placeholder="Title Post">
+        <label for="title-post">Page Title</label>
+        <input type="text" class="form-control" name="post_title" value="{{ ($model != "" ) ? $model->post_title : old('post_title') }}" id="title-post" placeholder="Page Title">
         @if($model != "")
         <p class="help-block"><strong>Permalink : </strong><span id="slug-permalink">{{ Url('/') }}/{{ $model->post_name }}</span></p>
         @endif

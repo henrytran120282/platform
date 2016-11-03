@@ -72,3 +72,13 @@ Route::patch('admin/roles/{roles}', ['as'=> 'admin.roles.update', 'uses' => 'Rol
 Route::delete('admin/roles/{roles}', ['as'=> 'admin.roles.destroy', 'uses' => 'RolesController@destroy']);
 Route::get('admin/roles/{roles}', ['as'=> 'admin.roles.show', 'uses' => 'RolesController@show']);
 Route::get('admin/roles/{roles}/edit', ['as'=> 'admin.roles.edit', 'uses' => 'RolesController@edit']);
+
+
+Route::get('admin/contacts', ['as'=> 'admin.contacts.index', 'uses' => 'ContactController@index']);
+Route::post('contacts', ['as'=> 'contacts.store', 'uses' => 'ContactController@store']);
+Route::get('contacts', ['as'=> 'contacts.create', 'uses' => 'ContactController@create']);
+Route::put('admin/contacts/{contacts}', ['as'=> 'admin.contacts.update', 'uses' => 'ContactController@update']);
+Route::patch('admin/contacts/{contacts}', ['as'=> 'admin.contacts.update', 'uses' => 'ContactController@update']);
+Route::delete('admin/contacts/{contacts}', ['as'=> 'admin.contacts.destroy', 'uses' => 'ContactController@destroy']);
+Route::get('admin/contacts/{contacts}', ['as'=> 'admin.contacts.show', 'uses' => 'ContactController@show']);
+Route::get('admin/contacts/{contacts}/edit', ['as'=> 'admin.contacts.edit', 'uses' => 'ContactController@edit']);
