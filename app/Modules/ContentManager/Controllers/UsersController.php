@@ -2,6 +2,7 @@
 
 namespace App\Modules\ContentManager\Controllers;
 
+use App\Facades\Helper;
 use Illuminate\Http\Request;
 use App\User;
 use Admin;
@@ -11,6 +12,9 @@ use App\Entities\Roles;
 
 class UsersController extends Controller
 {
+    public function __construct(){
+        return \Helper::permissionList();
+    }
     /**
      * Display a listing of the resource.
      *

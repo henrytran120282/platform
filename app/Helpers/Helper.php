@@ -8,6 +8,8 @@ class Helper
 {
     private $options;
 
+    private $permission;
+
     public function __construct() {
         $this->options =  Options::all()->toArray();
     }
@@ -69,5 +71,35 @@ class Helper
 
     public function menuList(){
         return true;
+    }
+
+    private function permissionConfig($role = 'users'){
+        $this->permission = null;
+        if(in_array($role,array('administrator','editor'))){
+            return $this->permission = config("permission.administrator");
+        }
+        return $this->permission = config("permission.users");
+    }
+
+    public function permissionList($role = null){
+        $permissions = $this->permissionConfig('administrator');
+        $permissionUI = '<ul>';
+        if(count($permissions) > 0){
+            foreach($permissions as $index=>$moduleList){
+                if(count($moduleList)>1){
+                    $permissionUI .= "<li>{$index}<ul>";
+                    foreach($moduleList as $key=>$action){
+                        dd($key);
+                        $permissionUI .= "<li><input name='permission' type='checkbox' value='{$key}' />{$value}</li>";
+                    }
+                    $permissionUI .= "</ul></li>";
+                }else{
+                    $permissionUI .= "<li><input name='permission' type='checkbox' value='{$index}' />{$moduleList}</li>";
+                }
+            }
+        }
+        $permissionUI .= '</ul>';
+dd($permissionUI);
+        return $permissionUI;
     }
 }

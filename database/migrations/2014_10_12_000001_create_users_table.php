@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->longText('photo');
             $table->longText('description');
             $table->integer('is_admin')->default(0);
+            $table->json('permission');
             $table->rememberToken();
             $table->timestamps();
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
