@@ -83,23 +83,21 @@ class Helper
 
     public function permissionList($role = null){
         $permissions = $this->permissionConfig('administrator');
-        $permissionUI = '<ul>';
-        if(count($permissions) > 0){
-            foreach($permissions as $index=>$moduleList){
-                if(count($moduleList)>1){
-                    $permissionUI .= "<li>{$index}<ul>";
-                    foreach($moduleList as $key=>$action){
-                        dd($key);
-                        $permissionUI .= "<li><input name='permission' type='checkbox' value='{$key}' />{$value}</li>";
-                    }
-                    $permissionUI .= "</ul></li>";
-                }else{
-                    $permissionUI .= "<li><input name='permission' type='checkbox' value='{$index}' />{$moduleList}</li>";
-                }
-            }
-        }
-        $permissionUI .= '</ul>';
-dd($permissionUI);
+        $permissionUI = $this->array2ul($permissions);
+        echo '<pre>';
+        var_dump($permissionUI);die;
         return $permissionUI;
+    }
+
+    public function array2ul($array) {
+        $out = "<ul>";
+        foreach($array as $key => $elem){
+            if(!is_array($elem)){
+                $out .= "<li><span><input name='permission' type='checkbox' value='$key'/>$elem</span></li>";
+            }
+            else $out .= "<li><span><input name='permission' type='checkbox' value='$key'/></span>".$this->array2ul($elem)."</li>";
+        }
+        $out .= "</ul>";
+        return $out;
     }
 }
