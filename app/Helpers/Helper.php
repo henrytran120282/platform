@@ -1,48 +1,55 @@
-<?php 
+<?php
 
 namespace App\Helpers;
+
 use Blade;
 use Carbon\Carbon;
 use App\Modules\ContentManager\Models\Options;
+
 class Helper
 {
     private $options;
 
     private $permission;
 
-    public function __construct() {
-        $this->options =  Options::all()->toArray();
+    public function __construct()
+    {
+        $this->options = Options::all()->toArray();
     }
 
     public function menu($group = "main-menu")
     {
-    	$menu = new Menu($group);        
+        $menu = new Menu($group);
         return $menu->generateMenu();
     }
 
-    public function compress($soure,$destination){
-        $com = new Compress($soure,$destination);
+    public function compress($soure, $destination)
+    {
+        $com = new Compress($soure, $destination);
         return $com->run();
     }
 
-    public function extract($soure,$destination){
-        $com = new Compress($soure,$destination);
+    public function extract($soure, $destination)
+    {
+        $com = new Compress($soure, $destination);
         return $com->extract();
     }
 
-    public function widget($class,$option = []){
-        $class = "App\\Widgets\\".str_replace(".", "\\", $class);
+    public function widget($class, $option = [])
+    {
+        $class = "App\\Widgets\\" . str_replace(".", "\\", $class);
         $widget = new $class;
         return $widget->test();
     }
 
-    public function taxonomyLink($taxonomy,$link = true){
+    public function taxonomyLink($taxonomy, $link = true)
+    {
         $res = [];
-        if($link){
+        if ($link) {
             foreach ($taxonomy as $value) {
-                $res[] = '<a href="'.url("/category/".$value->slug).'">'.$value->name.'</a>';
+                $res[] = '<a href="' . url("/category/" . $value->slug) . '">' . $value->name . '</a>';
             }
-        }else{
+        } else {
             foreach ($taxonomy as $value) {
                 $res[] = $value->name;
             }
@@ -50,52 +57,57 @@ class Helper
         return implode(",", $res);
     }
 
-    public function bbcode($content){
+    public function bbcode($content)
+    {
         $bbcode = new BBCode();
         return $bbcode->toHTML($content);
     }
 
-    public function option($keySearch){
+    public function option($keySearch)
+    {
         $result = null;
         foreach ($this->options as $value) {
-            if($value['name'] == $keySearch){
+            if ($value['name'] == $keySearch) {
                 $result = $value['value'];
             }
         }
         return $result;
     }
 
-    public function appTitle($title){
-        return ($title == "") ? $this->option("site_title") : $title." - ".$this->option("site_title");
+    public function appTitle($title)
+    {
+        return ($title == "") ? $this->option("site_title") : $title . " - " . $this->option("site_title");
     }
 
-    public function menuList(){
+    public function menuList()
+    {
         return true;
     }
 
-    private function permissionConfig($role = 'users'){
-        $this->permission = null;
-        if(in_array($role,array('administrator','editor'))){
-            return $this->permission = config("permission.administrator");
+    public function permissionList($role = null)
+    {
+        $permissionsList = config("permission.users");
+        if (in_array($role, array('administrator', 'editor'))) {
+            $permissionsList = config("permission.administrator");
         }
-        return $this->permission = config("permission.users");
-    }
+        $permissionUI = "<ul class='list-group'><li class='list-group-item'><input class='minimal' type='checkbox' id='fullaccess'> Allow All Access</li>";
+        $permissionUI .= $this->passingToList($permissionsList);
+        $permissionUI .= '</ul>';
 
-    public function permissionList($role = null){
-        $permissions = $this->permissionConfig('administrator');
-        $permissionUI = $this->array2ul($permissions);
-        echo '<pre>';
-        var_dump($permissionUI);die;
         return $permissionUI;
     }
 
-    public function array2ul($array) {
-        $out = "<ul>";
-        foreach($array as $key => $elem){
-            if(!is_array($elem)){
-                $out .= "<li><span><input name='permission' type='checkbox' value='$key'/>$elem</span></li>";
+    public function passingToList($array)
+    {
+        $out = "<ul  class='list-group'>";
+        foreach ($array as $key => $elem) {
+            if (!is_array($elem)) {
+                $fieldData = explode('@',$elem);
+                $out .= "<li class='list-group-item'><input class='minimal' name='{$fieldData[0]}[]' type='checkbox' value='{$fieldData[1]}'> " . (ucfirst($fieldData[1])) . "</li>";
+            } else {
+                $out .= "<button type='button' class='btn btn-info' data-toggle='collapse' data-target='#{$key}'> ".(ucfirst(str_replace('-', ' ', $key)))."  <span class='glyphicon glyphicon-plus'></span></button><div id='{$key}' class='collapse'>";
+                $out .= "<li class='list-group-item'><input class='minimal' name='{$key}' type='checkbox' value=''> All" . $this->passingToList($elem) . "</li></div>";
             }
-            else $out .= "<li><span><input name='permission' type='checkbox' value='$key'/></span>".$this->array2ul($elem)."</li>";
         }
         $out .= "</ul>";
         return $out;
