@@ -90,7 +90,7 @@ class Helper
         if (in_array($role, array('administrator', 'editor'))) {
             $permissionsList = config("permission.administrator");
         }
-        $permissionUI = "<ul class='list-group'><li class='list-group-item'><input class='minimal' type='checkbox' id='fullaccess'> Allow All Access</li>";
+        $permissionUI = "<ul class='list-group'><li class='list-group-item'><input type='checkbox' id='fullaccess'> Allow All Access</li>";
         $permissionUI .= $this->passingToList($permissionsList);
         $permissionUI .= '</ul>';
 
@@ -103,10 +103,10 @@ class Helper
         foreach ($array as $key => $elem) {
             if (!is_array($elem)) {
                 $fieldData = explode('@',$elem);
-                $out .= "<li class='list-group-item'><input class='minimal' name='{$fieldData[0]}[]' type='checkbox' value='{$fieldData[1]}'> " . (ucfirst($fieldData[1])) . "</li>";
+                $out .= "<li class='list-group-item'><input id='checkBoxChild' name='permission[{$fieldData[0]}][]' type='checkbox' value='{$fieldData[1]}'> " . (ucfirst($fieldData[1])) . "</li>";
             } else {
                 $out .= "<button type='button' class='btn btn-info' data-toggle='collapse' data-target='#{$key}'> ".(ucfirst(str_replace('-', ' ', $key)))."  <span class='glyphicon glyphicon-plus'></span></button><div id='{$key}' class='collapse'>";
-                $out .= "<li class='list-group-item'><input class='minimal' name='{$key}' type='checkbox' value=''> All" . $this->passingToList($elem) . "</li></div>";
+                $out .= "<li class='list-group-item'><input id='checkBoxParent' type='checkbox' value=''> All" . $this->passingToList($elem) . "</li></div>";
             }
         }
         $out .= "</ul>";

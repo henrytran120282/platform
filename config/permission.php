@@ -41,7 +41,7 @@ return array(
             'roles@index','roles@create','roles@edit','roles@destroy'
         ),
         'users-manager'=>array(
-            'users@create','users@edit','users@destroy','users@edit-profile'
+            'users@create','users@edit','users@destroy','users@profile'
         ),
         'setting'=>array('setting@index'),
     ),

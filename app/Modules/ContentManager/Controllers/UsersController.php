@@ -51,13 +51,13 @@ class UsersController extends Controller
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6',
         ]);
-
         $model->name = $request->name;
         $model->email = $request->email;
         $model->role_id = $request->role_id;
         $model->password = bcrypt($request->password);
         $model->description = $request->description;
         $model->photo = $request->photo;
+        $model->permission = (($request->permission != null)?\GuzzleHttp\json_encode($request->permission):null);
         $model->save();
         return redirect(Admin::StrURL('contentManager/user'));
     }
@@ -108,6 +108,7 @@ class UsersController extends Controller
         $model->description = $request->description;
         $model->role_id = $request->role_id;
         $model->photo = $request->photo;
+        $model->permission = (($request->permission != null)?\GuzzleHttp\json_encode($request->permission):null);
         $model->save();
         return redirect(Admin::StrURL('contentManager/user'));
     }
