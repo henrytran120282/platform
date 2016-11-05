@@ -1,59 +1,53 @@
 <?php
 return array(
     'administrator' => array(
-        'content-manager'=>array(
-            'manage-page' => array(
-               'view','add','edit','update','delete'
-            ),
-            'manage-post' => array(
-                'view','add','edit','update','delete'
-            ),
-            'manage-category' => array(
-                'view','add','edit','update','delete'
-            ),
-            'manage-tag' => array(
-                'view','add','edit','update','delete'
-            ),
-            'manage-comment' => array(
-               'approve','delete'
-            ),
+        'manage-page' => array(
+            'page@index','page@create','page@edit','page@update','page@destroy'
+        ),
+        'manage-post' => array(
+            'post@index','post@create','post@edit','post@update','post@destroy'
+        ),
+        'manage-category' => array(
+            'category@index','category@create','category@edit','category@update','category@destroy'
+        ),
+        'manage-tag' => array(
+            'tag@index','tag@create','tag@edit','tag@update','tag@destroy'
+        ),
+        'manage-comment' => array(
+            'comment@approve','comment@destroy'
         ),
         'menu-manager'=>array(
-            'view','add','edit','update','delete'
+            'menu@index','menu@create','menu@edit','menu@update','menu@destroy'
         ),
         'media-manager'=>array(
-            'view','upload'
+            'media@index','media@upload','media@destroy'
         ),
-        'media-manager'=>array(
-            'view','upload','delete'
-        ),
-        'widget-manager'=>array(
-            'view','add','edit','delete'
+        'theme-manager'=>array(
+            'theme@index','theme@edit','theme@destroy'
         ),
         'widget-manager'=>array(
-            'slide-manager'=>array(
-                'gallery-manager'=>array(
-                    'add','edit','delete'
-                ),
-                'gallery-image-manager'=>array(
-                    'add','edit','delete'
-                ),
-            )
+            'widget@index','widget@create','widget@edit','widget@destroy'
+        ),
+        'gallery-manager'=>array(
+            'gallery@index','gallery@create','gallery@edit','gallery@destroy'
+        ),
+        'gallery-images-manager'=>array(
+            'gallery-images@index','gallery-images@create','gallery-images@edit','gallery-images@destroy'
         ),
         'contacts-manager'=>array(
-            'view','delete'
+            'contacts@index','contacts@destroy'
         ),
         'roles-manager'=>array(
-            'add','edit','delete'
+            'roles@index','roles@create','roles@edit','roles@destroy'
         ),
         'users-manager'=>array(
-            'add','edit','delete','edit-profile'
+            'users@create','users@edit','users@destroy','users@edit-profile'
         ),
-        'setting'=>'Setting',
+        'setting'=>array('setting@index'),
     ),
     'users'=>array(
         'contacts'=>array(
-            'view','send-message'
+            'contacts@index','contacts@send-message'
         ),
     ),
 );
