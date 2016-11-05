@@ -1,8 +1,6 @@
 <?php
 return array(
     'administrator' => array(
-        'full-permission'=>'Fully Access',
-        'dashboard'=>'Dashboard',
         'content-manager'=>array(
             'manage-page' => array(
                'view','add','edit','update','delete'
@@ -54,7 +52,6 @@ return array(
         'setting'=>'Setting',
     ),
     'users'=>array(
-        'full-permission'=>'Fully Access',
         'contacts'=>array(
             'view','send-message'
         ),

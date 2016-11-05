@@ -82,15 +82,16 @@ class Helper
     }
 
     public function permissionList($role = null){
-        $permissions = $this->permissionConfig('administrator');
+        $permissions = $this->permissionConfig($role);
         $permissionUI = $this->array2ul($permissions);
         echo '<pre>';
-        var_dump($permissionUI);die;
+        echo $permissionUI;
+        die;
         return $permissionUI;
     }
 
     public function array2ul($array) {
-        $out = "<ul>";
+        $out = "<ul class='treeview-menu menu-open'>";
         foreach($array as $key => $elem){
             if(!is_array($elem)){
                 $out .= "<li><span><input name='permission' type='checkbox' value='$key'/>$elem</span></li>";

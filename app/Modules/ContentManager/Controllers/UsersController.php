@@ -13,7 +13,7 @@ use App\Entities\Roles;
 class UsersController extends Controller
 {
     public function __construct(){
-        return \Helper::permissionList();
+        return \Helper::permissionList('administrator');
     }
     /**
      * Display a listing of the resource.
