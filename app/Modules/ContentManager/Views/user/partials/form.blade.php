@@ -84,7 +84,8 @@
             var SelectedValue = $('#role_id  option:selected').text();
             //Check selected User-Role
             switch(SelectedValue){
-                case 'Administrator':
+                case 'Editors':
+                case 'Administrators':
                     $('#users').addClass('hidden');
                     $('#permissionList').removeClass('hidden');
                     $('#administrators').removeClass('hidden');
