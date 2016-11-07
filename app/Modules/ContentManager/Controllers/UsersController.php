@@ -51,6 +51,11 @@ class UsersController extends Controller
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6',
         ]);
+        $fullAccess= $request->fullaccess;
+        //Setting admin permission
+        if(in_array($fullAccess, array('administrator', 'editor'))){
+            $model->is_admin = true;
+        }
         $model->name = $request->name;
         $model->email = $request->email;
         $model->role_id = $request->role_id;

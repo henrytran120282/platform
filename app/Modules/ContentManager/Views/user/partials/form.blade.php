@@ -79,30 +79,39 @@
                 $('#checkBoxChild, #checkBoxParent').removeAttr('checked');
             }
         });
+        //Default loading role
+        if($('#role_id').val() != null){
+            var SelectedValue = $('#role_id  option:selected').text();
+            loadPermissionList(SelectedValue);
+        }
         //Process update role-permission
         $('#role_id').change(function(){
             var SelectedValue = $('#role_id  option:selected').text();
-            //Check selected User-Role
-            switch(SelectedValue){
-                case 'Editors':
-                case 'Administrators':
-                    $('#users').addClass('hidden');
-                    $('#permissionList').removeClass('hidden');
-                    $('#administrators').removeClass('hidden');
-                    break;
-                case 'Users':
-                    $('#administrators').addClass('hidden');
-                    $('#permissionList').removeClass('hidden');
-                    $('#users').removeClass('hidden');
-                    break;
-                default :
-                    //Process init user-role
-                    $('#permissionList').addClass('hidden');
-                    $('#administrators').addClass('hidden');
-                    $('#users').addClass('hidden');
-                    break;
-            }
+            loadPermissionList(SelectedValue);
         });
     });
+    //Function show permission list
+    function loadPermissionList(SelectedValue){
+        //Check selected User-Role
+        switch(SelectedValue){
+            case 'Editors':
+            case 'Administrators':
+                $('#users').addClass('hidden');
+                $('#permissionList').removeClass('hidden');
+                $('#administrators').removeClass('hidden');
+                break;
+            case 'Users':
+                $('#administrators').addClass('hidden');
+                $('#permissionList').removeClass('hidden');
+                $('#users').removeClass('hidden');
+                break;
+            default :
+                //Process init user-role
+                $('#permissionList').addClass('hidden');
+                $('#administrators').addClass('hidden');
+                $('#users').addClass('hidden');
+                break;
+        }
+    }
 </script>
 @endpush

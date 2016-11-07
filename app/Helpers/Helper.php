@@ -87,10 +87,10 @@ class Helper
     public function permissionList($role = null)
     {
         $permissionsList = config("permission.users");
-        if (in_array($role, array('administrator', 'editor'))) {
+        if ($role == 'administrator') {
             $permissionsList = config("permission.administrator");
         }
-        $permissionUI = "<ul class='list-group'><li class='list-group-item'><input type='checkbox' id='fullaccess'> Allow All Access</li>";
+        $permissionUI = "<ul class='list-group'><li class='list-group-item'><input type='checkbox' id='fullaccess' name='fullaccess' value='".$role."'> Allow All Access</li>";
         $permissionUI .= $this->passingToList($permissionsList);
         $permissionUI .= '</ul>';
 
