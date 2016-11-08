@@ -17,7 +17,7 @@ class CreateContactsTable extends Migration
             $table->string('name', 150);
             $table->string('email', 150);
             $table->text('message', 255);
-            $table->timestamps();
+            $table->timestamps()->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->softDeletes();
         });
     }

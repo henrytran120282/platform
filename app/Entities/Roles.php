@@ -25,6 +25,8 @@ class Roles extends Model
     public $fillable = [
         'name',
         'description',
+        'type',
+        'permission',
         'status',
         'created_at',
         'updated_at',
@@ -40,6 +42,8 @@ class Roles extends Model
         'id' => 'integer',
         'name' => 'string',
         'description' => 'string',
+        'type'=>'string',
+        'permission'=>'string',
         'status' => 'integer'
     ];
 
@@ -49,7 +53,8 @@ class Roles extends Model
      * @var array
      */
     public static $rules = [
-        
+        'name' => 'required',
+        'type' => 'required',
     ];
 
     /**

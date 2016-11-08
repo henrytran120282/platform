@@ -10,7 +10,7 @@ class Helper
 {
     private $options;
 
-    private $permission;
+    private $permissionAsigned = array();
 
     public function __construct()
     {
@@ -84,32 +84,53 @@ class Helper
         return true;
     }
 
-    public function permissionList($role = null)
+    public function permissionList($role = null, $permissionAsigned)
     {
+        $this->permissionAsigned = ($permissionAsigned != null)?\GuzzleHttp\json_decode($permissionAsigned):$this->permissionAsigned;
         $permissionsList = config("permission.users");
         if ($role == 'administrator') {
             $permissionsList = config("permission.administrator");
         }
-        $permissionUI = "<ul class='list-group'><li class='list-group-item'><input type='checkbox' id='fullaccess' name='fullaccess' value='".$role."'> Allow All Access</li>";
-        $permissionUI .= $this->passingToList($permissionsList);
+        $permissionUI = "<ul class='list-group'><li class='list-group-item'><input type='checkbox' id='".$role."-role' name='fullaccess' value='".$role."'> Allow All Access</li>";
+        $permissionUI .= $this->passingToList($permissionsList, $role);
         $permissionUI .= '</ul>';
 
         return $permissionUI;
     }
 
-    public function passingToList($array)
+    public function passingToList($array, $role)
     {
+        $permissionAsigned = [];
+        if($this->permissionAsigned != null){
+            $permissionAsigned = $this->permissionAsigned;
+        }
         $out = "<ul  class='list-group'>";
+        $assigned = '';
         foreach ($array as $key => $elem) {
             if (!is_array($elem)) {
                 $fieldData = explode('@',$elem);
-                $out .= "<li class='list-group-item'><input id='checkBoxChild' name='permission[{$fieldData[0]}][]' type='checkbox' value='{$fieldData[1]}'> " . (ucfirst($fieldData[1])) . "</li>";
+                $findParentKey = (string) $this->recursive_array_search($fieldData[1], $permissionAsigned);
+                if($findParentKey != false){
+                    $assigned = (in_array($fieldData[1],$permissionAsigned->{$findParentKey}) ? 'checked':'');
+                }
+                $out .= "<li class='list-group-item'><input id='checkBoxChild-{$role}' name='permission[{$fieldData[0]}][]' type='checkbox' value='{$fieldData[1]}'  {$assigned}>". (ucfirst($fieldData[1])) . "</li>";
             } else {
                 $out .= "<button type='button' class='btn btn-info' data-toggle='collapse' data-target='#{$key}'> ".(ucfirst(str_replace('-', ' ', $key)))."  <span class='glyphicon glyphicon-plus'></span></button><div id='{$key}' class='collapse'>";
-                $out .= "<li class='list-group-item'><input id='checkBoxParent' type='checkbox' value=''> All" . $this->passingToList($elem) . "</li></div>";
+                $out .= "<li class='list-group-item'><input id='checkBoxParent-{$role}' type='checkbox' value=''> All" . $this->passingToList($elem, $role) . "</li></div>";
             }
         }
         $out .= "</ul>";
         return $out;
+    }
+
+    public function recursive_array_search($needle,$haystack) {
+
+        foreach($haystack as $key=>$value) {
+            $current_key=$key;
+            if($needle===$value OR (is_array($value) && $this->recursive_array_search($needle,$value) !== false)) {
+                return $current_key;
+            }
+        }
+        return false;
     }
 }

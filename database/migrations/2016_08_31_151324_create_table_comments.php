@@ -22,7 +22,7 @@ class CreateTableComments extends Migration
             $table->boolean('approved')->default(false);
             $table->bigInteger('parent')->default(0);
             $table->integer('user_id')->default(0)->unsigned();
-            $table->timestamps();
+            $table->timestamps()->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->index('post_id');
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
         });

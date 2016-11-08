@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\Roles;
 use App\Http\Requests\CreateRolesRequest;
 use App\Http\Requests\UpdateRolesRequest;
 use App\Repositories\RolesRepository;
@@ -55,9 +56,14 @@ class RolesController extends AppBaseController
      */
     public function store(CreateRolesRequest $request)
     {
-        $input = $request->all();
+        $role = New Roles();
 
-        $roles = $this->rolesRepository->create($input);
+        $role->name = $request->name;
+        $role->description = $request->description;
+        $role->type = $request->type;
+        $role->permission = (($request->permission != null)?\GuzzleHttp\json_encode($request->permission):null);
+        $role->status = $request->status;
+        $role->save();
 
         Flash::success('Roles saved successfully.');
 
@@ -121,8 +127,14 @@ class RolesController extends AppBaseController
 
             return redirect(route('admin.roles.index'));
         }
+        $roles->name = $request->name;
+        $roles->description = $request->description;
+        $roles->type = $request->type;
+        $roles->permission = (($request->permission != null)?\GuzzleHttp\json_encode($request->permission):null);
+        $roles->status = $request->status;
+        $roles->save();
 
-        $roles = $this->rolesRepository->update($request->all(), $id);
+//        $roles = $this->rolesRepository->update($request->all(), $id);
 
         Flash::success('Roles updated successfully.');
 

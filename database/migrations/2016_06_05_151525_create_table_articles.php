@@ -29,7 +29,7 @@ class CreateTableArticles extends Migration
             $table->string('post_type',20);
             $table->integer('post_hit')->default(0);
             $table->string('post_mime_type',200)->default("post");
-            $table->timestamps();
+            $table->timestamps()->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->foreign('post_author')->references('id')->on('users')->onDelete('cascade');
         });
     }

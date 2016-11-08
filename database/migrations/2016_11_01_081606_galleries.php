@@ -16,7 +16,7 @@ class Galleries extends Migration
             $table->bigIncrements('id')->unsigned();
             $table->string('gallery_name', 100);
             $table->boolean('gallery_status');
-            $table->timestamps();
+            $table->timestamps()->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->softDeletes();
         });
     }

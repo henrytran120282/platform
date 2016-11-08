@@ -22,7 +22,7 @@ class GalleryImages extends Migration
             $table->boolean('image_status');
             $table->index('gallery_id');
             $table->foreign('gallery_id')->references('id')->on('galleries')->onDelete('cascade');
-            $table->timestamps();
+            $table->timestamps()->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->softDeletes();
         });
     }

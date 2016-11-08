@@ -51,18 +51,13 @@ class UsersController extends Controller
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6',
         ]);
-        $fullAccess= $request->fullaccess;
-        //Setting admin permission
-        if(in_array($fullAccess, array('administrator', 'editor'))){
-            $model->is_admin = true;
-        }
+
         $model->name = $request->name;
         $model->email = $request->email;
         $model->role_id = $request->role_id;
         $model->password = bcrypt($request->password);
         $model->description = $request->description;
         $model->photo = $request->photo;
-        $model->permission = (($request->permission != null)?\GuzzleHttp\json_encode($request->permission):null);
         $model->save();
         return redirect(Admin::StrURL('contentManager/user'));
     }
