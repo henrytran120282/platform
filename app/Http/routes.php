@@ -23,6 +23,11 @@ Route::group(['namespace' => 'Auth', 'prefix' => 'auth', 'as' => 'auth.', 'middl
     Route::get('{driver}/callback', 'SocialController@handleProviderCallback')->name('social.callback');
 });
 
+Route::get('logout', function () {
+    Auth::logout();
+    return redirect('/');
+});
+
 /*
 |--------------------------------------------------------------------------
 | API routes

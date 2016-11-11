@@ -78,9 +78,9 @@ class SocialController extends Controller
                 }
             }
         } catch (InvalidStateException $e) {
-            abort(400);
+            abort(400, $e->getMessage());
         } catch (ClientException $e) {
-            abort(400);
+            abort(400, $e->getMessage());
         }
 
     }
