@@ -1,0 +1,27 @@
+.social-button-group {
+	.social-button {
+		color: #FFFFFF;
+	}
+}
+.social-button {
+	color: #FFFFFF;
+	width: 70px;
+	height: 70px;
+	line-height: 70px;
+	text-align: center;
+	display: inline-block;
+	font-size: 3.2rem;
+
+	&.button-facebook {
+		background-color: $facebook-color;
+	}
+	&.button-github {
+		background-color: $github-color;
+	}
+	&.button-twitter {
+		background-color: $twitter-color;
+	}
+	&.button-google {
+		background-color: $google-color;
+	}
+}

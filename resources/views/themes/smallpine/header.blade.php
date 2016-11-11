@@ -14,8 +14,8 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{{URL::to('/')}}/assets/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{URL::to('/themes/smallpine')}}/css/style.css">
-    
-    {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
+
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @stack('style-top')
     <style>
         body {
@@ -39,7 +39,7 @@
                         </div>
                         <ul id="menu-main-menu" class="sr-mainmenu">
                             {!!html_entity_decode(Theme::menu("menu-top"))!!}
-                        </ul>                    
+                        </ul>
                     </nav>
                 </div>
                 <div class="pull-right">
@@ -48,8 +48,8 @@
                         <a href="{{((Theme::option('social_media','twitter') != "")?Theme::option('social_media','twitter'):'#')}}" target="_blank"><i class="fa fa-twitter"></i></a>
                         <a href="{{((Theme::option('social_media','instagram') != "")?Theme::option('social_media','instagram'):'#')}}" target="_blank"><i class="fa fa-instagram"></i></a>
                         <a href="{{((Theme::option('social_media','youtube') != "")?Theme::option('social_media','youtube'):'#')}}" target="_blank"><i class="fa fa-youtube-play"></i></a>
-                    </div> 
-                </div> 
+                    </div>
+                </div>
             </div>
         </div>
         <div class="logo-ads">
