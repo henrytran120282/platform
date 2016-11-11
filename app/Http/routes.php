@@ -18,15 +18,15 @@ Route::auth();
 /**
  * Social Auth Route
  */
-Route::group(['namespace' => 'Auth', 'prefix' => 'auth', 'as' => 'auth.', 'middleware' => 'guest'], function () {
+Route::group(['namespace' => 'Auth', 'prefix' => 'auth', 'as' => 'auth.', 'middleware' => 'guest:member'], function () {
     Route::get('{driver}', 'SocialController@redirectToProvider')->name('social');
     Route::get('{driver}/callback', 'SocialController@handleProviderCallback')->name('social.callback');
 });
 
 Route::get('logout', function () {
-    Auth::logout();
+    Auth::guard('member')->logout();
     return redirect('/');
-});
+})->middleware('auth:member');
 
 /*
 |--------------------------------------------------------------------------
