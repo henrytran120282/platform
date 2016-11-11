@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 
 class CreateTableArticles extends Migration
 {
@@ -18,18 +19,19 @@ class CreateTableArticles extends Migration
             $table->longText('post_content');
             $table->text('post_title');
             $table->text('post_excerpt');
-            $table->string('post_status',20)->default("publish");
-            $table->string('comment_status',20)->default("open");
-            $table->string('post_password',20);
+            $table->string('post_status', 20)->default("publish");
+            $table->string('comment_status', 20)->default("open");
+            $table->string('post_password', 20);
             $table->string('post_name');
             $table->bigInteger('post_parent')->default(0);
             $table->string('guid');
             $table->integer('menu_order')->default(0);
             $table->string('menu_group');
-            $table->string('post_type',20);
+            $table->string('post_type', 20);
             $table->integer('post_hit')->default(0);
-            $table->string('post_mime_type',200)->default("post");
-            $table->timestamps()->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->string('post_mime_type', 200)->default("post");
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->foreign('post_author')->references('id')->on('users')->onDelete('cascade');
         });
     }

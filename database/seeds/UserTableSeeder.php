@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class UserTableSeeder extends Seeder
 {
@@ -13,13 +14,13 @@ class UserTableSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
-                'role_id' => 1,
-                'name' => 'Administrator',
-                'email' => 'henry.tran@qsoft.com.vn',
+                'role_id'  => 1,
+                'name'     => 'Administrator',
+                'email'    => 'henry.tran@qsoft.com.vn',
                 'is_admin' => true,
                 'password' => bcrypt('Admin@123456!'),
-                'photo' => "default-user.png"
-            ]
+                'photo'    => "default-user.png",
+            ],
         ]);
     }
 }
