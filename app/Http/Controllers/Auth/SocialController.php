@@ -15,16 +15,28 @@ use Socialite;
 
 class SocialController extends Controller
 {
+
+    /**
+     * Guard for social
+     * @var string
+     */
+    protected $guard = 'member';
+
     /**
      * Default Auth Model
      * @var User
      */
     protected $model;
 
+    /**
+     * Inject Default Model
+     * @param User $model
+     */
     public function __construct(User $model)
     {
         $this->model = $model;
     }
+
     /**
      * Redirect the user to the GitHub authentication page.
      *
@@ -61,7 +73,7 @@ class SocialController extends Controller
             $user = Socialite::driver($driver)->user();
             try {
                 $localUser = $this->model->where('provider', $driver)->where('email', $user->getEmail())->firstOrFail();
-                $auth      = Auth::login($localUser);
+                $auth      = Auth::guard($this->guard)->login($localUser);
                 return redirect('/');
 
             } catch (ModelNotFoundException $e) {

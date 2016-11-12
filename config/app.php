@@ -170,6 +170,7 @@ return [
         \InfyOm\AdminLTETemplates\AdminLTETemplatesServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Infinety\FileManager\FileManagerServiceProvider::class,
+        Qsoftvn\ShoppingCart\ShoppingServiceProvider::class,
     ],
 
     /*
