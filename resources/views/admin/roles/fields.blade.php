@@ -21,6 +21,9 @@
     {!! Form::select('status', [0=>'Deactive',1=>'Active'], 1, ['class' => 'form-control']) !!}
 </div>
 <!-- Permission List -->
+<?php
+$permissionAsigned = isset($roles->permission) ? $roles->permission : null;
+?>
 <div class="form-group col-md-12 hidden" id="permissionList">
     <div class="container">
         <div class="panel-group">
@@ -31,16 +34,8 @@
                     </h4>
                 </div>
                 <div id="collapse1" class="panel-collapse collapse">
-                    <div id="users" class="hidden">
-                        <?php
-                        $permissionAsigned = isset($roles->permission) ? $roles->permission : null;
-                        $permissionList = Helper::permissionList('users', $permissionAsigned);
-                        print $permissionList;
-                        ?>
-                    </div>
                     <div id="administrators" class="hidden">
                         <?php
-                        $permissionAsigned = isset($roles->permission) ? $roles->permission : null;
                         $permissionList = Helper::permissionList('administrator', $permissionAsigned);
                         print $permissionList;
                         ?>
@@ -59,6 +54,21 @@
 @push('scripts')
 <script>
     $(document).ready(function () {
+        //Default checked value for each action name
+        $('#checkBoxChild-administrator').each(function(index,value){
+            var defaultAllAccess = true;
+            if(value.checked != true){
+                defaultAllAccess = false;
+            }
+            $('#administrator-role').attr('checked', defaultAllAccess);
+        });
+        $('#checkBoxChild-users').each(function(index,value){
+            var defaultAllAccess = true;
+            if(value.checked != true){
+                defaultAllAccess = false;
+            }
+            $('#users-role').attr('checked', defaultAllAccess);
+        });
         //Process permission list
         $("#administrator-role").change(function () {
             if (this.checked == true) {
@@ -67,6 +77,7 @@
                 $('#checkBoxChild-administrator, #checkBoxParent-administrator').removeAttr('checked');
             }
         });
+
         $("#users-role").change(function () {
             if (this.checked == true) {
                 $('#checkBoxChild-users, #checkBoxParent-users').attr('checked', true);
