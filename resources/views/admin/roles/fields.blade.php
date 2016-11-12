@@ -55,19 +55,12 @@ $permissionAsigned = isset($roles->permission) ? $roles->permission : null;
 <script>
     $(document).ready(function () {
         //Default checked value for each action name
-        $('#checkBoxChild-administrator').each(function(index,value){
+        $('#checkBoxChild-administrator').each(function (index, value) {
             var defaultAllAccess = true;
-            if(value.checked != true){
+            if (value.checked != true) {
                 defaultAllAccess = false;
             }
             $('#administrator-role').attr('checked', defaultAllAccess);
-        });
-        $('#checkBoxChild-users').each(function(index,value){
-            var defaultAllAccess = true;
-            if(value.checked != true){
-                defaultAllAccess = false;
-            }
-            $('#users-role').attr('checked', defaultAllAccess);
         });
         //Process permission list
         $("#administrator-role").change(function () {
@@ -75,14 +68,6 @@ $permissionAsigned = isset($roles->permission) ? $roles->permission : null;
                 $('#checkBoxChild-administrator, #checkBoxParent-administrator').attr('checked', true);
             } else {
                 $('#checkBoxChild-administrator, #checkBoxParent-administrator').removeAttr('checked');
-            }
-        });
-
-        $("#users-role").change(function () {
-            if (this.checked == true) {
-                $('#checkBoxChild-users, #checkBoxParent-users').attr('checked', true);
-            } else {
-                $('#checkBoxChild-users, #checkBoxParent-users').removeAttr('checked');
             }
         });
         //Default loading role
@@ -95,28 +80,33 @@ $permissionAsigned = isset($roles->permission) ? $roles->permission : null;
             var SelectedValue = $('#type  option:selected').val();
             loadPermissionList(SelectedValue);
         });
-    });
-    //Function show permission list
-    function loadPermissionList(SelectedValue) {
-        //Check selected User-Role
-        switch (SelectedValue) {
-            case 'admin':
-                $('#users').addClass('hidden');
-                $('#permissionList').removeClass('hidden');
-                $('#administrators').removeClass('hidden');
-                break;
-            case 'users':
-                $('#administrators').addClass('hidden');
-                $('#permissionList').removeClass('hidden');
-                $('#users').removeClass('hidden');
-                break;
-            default :
-                //Process init user-role
-                $('#permissionList').addClass('hidden');
-                $('#administrators').addClass('hidden');
-                $('#users').addClass('hidden');
-                break;
+        //Expand or Collapse panel
+        $('.btn-info').click(function () {
+            var currentID = $(this).attr('data-target');
+            $('.btn-info').each(function (index, obj) {
+                var ID = $(this).attr('data-target');
+                if (currentID != ID) {
+                    $('div' + ID).removeClass('in');
+                    $('div' + ID).removeAttr('aria-expanded');
+                    $(this).removeAttr('aria-expanded');
+                }
+            });
+        });
+        //Function show permission list
+        function loadPermissionList(SelectedValue) {
+            //Check selected User-Role
+            switch (SelectedValue) {
+                case 'users':
+                case 'admin':
+                    $('#permissionList').removeClass('hidden');
+                    $('#administrators').removeClass('hidden');
+                    break;
+                default :
+                    //Process init user-role
+                    $('#permissionList').addClass('hidden');
+                    $('#administrators').addClass('hidden');
+                    break;
+            }
         }
-    }
 </script>
 @endpush
